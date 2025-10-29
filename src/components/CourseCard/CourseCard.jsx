@@ -1,10 +1,12 @@
 import "./styles.css";
 import courseBoard from "../../assets/images/blue-board.svg";
+import { Link } from "react-router";
 
 export default function CourseCard({ course }) {
 
     return (
         <div className="course-index-card">
+            <Link to={`/courses/${course.id}`}>
             <div className="course-index-card-content">
                 <img src={courseBoard} alt="Course board illustration" />
                 <h2>{course.title}</h2>
@@ -17,6 +19,7 @@ export default function CourseCard({ course }) {
                     )}
                 </p>
             </div>
+            </Link>
         </div>
     )
 }

@@ -4,6 +4,7 @@ import { useLocation, Navigate } from 'react-router';
 import HomePage from '../HomePage/HomePage';
 import AboutPage from '../AboutPage/AboutPage';
 import CourseList from '../CourseList/CourseList';
+import CourseDetail from '../CourseDetail/CourseDetail';
 import redBoardLogo from '../../assets/images/red-board.svg';
 
 export default function App() {
@@ -33,6 +34,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/courses" element={<CourseList />} />
+          <Route path="/courses/:id" element={<CourseDetail />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/*" element={<Navigate to="/home" />} />
         </Routes>
