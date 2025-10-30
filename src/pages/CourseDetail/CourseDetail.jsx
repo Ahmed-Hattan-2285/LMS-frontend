@@ -1,6 +1,6 @@
 import "./styles.css";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router";
+import { useParams, Link } from "react-router";
 import * as lmsAPI from "../../utilities/lms-api";
 import blueBoard from "../../assets/images/blue-board.svg";
 
@@ -8,7 +8,7 @@ export default function CourseDetail() {
     const [courseDetail, setCourseDetail] = useState(null);
     const { id } = useParams();
 
-    useEffect(() => { 
+    useEffect(() => {
         async function getAndSetDetail() {
             try {
                 const course = await lmsAPI.courseDetail(id);
@@ -25,18 +25,22 @@ export default function CourseDetail() {
 
     return (
         <section className="detail-course-container">
-          <div className="detail-course-img">
-            <img src={blueBoard} alt="Course board illustration" />
-          </div>
-          <div className="course-details">
-            <h1>{ courseDetail.title }</h1>
-            <h2>
-                {courseDetail.instructor 
-                    ? `Instructor: ${courseDetail.instructor}` 
-                    : "No instructor listed."}
-            </h2>
-            <p>{ courseDetail.description }</p>
-          </div>
+            <div className="detail-course-img">
+                <img src={blueBoard} alt="Course board illustration" />
+            </div>
+            <div className="course-details">
+                <h1>{courseDetail.title}</h1>
+                <h2>
+                    {courseDetail.instructor
+                        ? `Instructor: ${courseDetail.instructor}`
+                        : "No instructor listed."}
+                </h2>
+                <p>{courseDetail.description}</p>
+            </div>
+            <div className="course-actions">
+                <Link to={`/courses/${courseDetail.id}/edit`} className="edit btn">Edit</Link>
+                <Link to={`/courses/confirm_delete/${courseDetail.id}`} className="delete btn">Delete</Link>
+            </div>
         </section>
     );
 }

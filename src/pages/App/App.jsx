@@ -1,6 +1,5 @@
 import "./App.css"
-import { Route, Routes, Link } from 'react-router';
-import { useLocation, Navigate } from 'react-router';
+import { Route, Routes, Link, useLocation, Navigate } from 'react-router';
 import HomePage from '../HomePage/HomePage';
 import AboutPage from '../AboutPage/AboutPage';
 import CourseList from '../CourseList/CourseList';
@@ -37,7 +36,9 @@ export default function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/courses" element={<CourseList />} />
           <Route path="/courses/:id" element={<CourseDetail />} />
-          <Route path="/courses/new" element={<CourseForm />} />
+          <Route path="/courses/new" element={<CourseForm createCourse={true}/>} />
+          <Route path="/courses/:id/edit" element={<CourseForm editCourse={true}/>} />
+          <Route path="/courses/confirm_delete/:id" element={<CourseForm deleteCourse={true}/>} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/*" element={<Navigate to="/home" />} />
         </Routes>
