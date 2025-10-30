@@ -8,3 +8,7 @@ export async function coursesIndex() {
 export async function courseDetail(id) {
     return sendRequest(`${url}${id}/`)
 }
+
+export async function createCourse(courseData) {
+    return sendRequest(url, 'POST', courseData)
+}
