@@ -1,0 +1,11 @@
+.form-page {
+  padding: 1rem 0;
+}
+
+.form-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+

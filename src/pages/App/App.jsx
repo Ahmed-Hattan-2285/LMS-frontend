@@ -6,6 +6,7 @@ import CourseList from '../CourseList/CourseList';
 import CourseDetail from '../CourseDetail/CourseDetail';
 import redBoardLogo from '../../assets/images/red-board.svg';
 import CourseForm from '../CourseForm/CourseForm';
+import LessonForm from '../LessonForm/LessonForm';
 
 export default function App() {
   const location = useLocation();
@@ -24,9 +25,9 @@ export default function App() {
           </div>
           <nav>
             <ul>
-              <li><Link to="/about">About</Link></li>
               <li><Link to="/courses">All Courses</Link></li>
               <li><Link to="/courses/new">New Course</Link></li>
+              <li><Link to="/about">About</Link></li>
             </ul>
           </nav>
         </div>
@@ -39,6 +40,7 @@ export default function App() {
           <Route path="/courses/new" element={<CourseForm createCourse={true}/>} />
           <Route path="/courses/:id/edit" element={<CourseForm editCourse={true}/>} />
           <Route path="/courses/confirm_delete/:id" element={<CourseForm deleteCourse={true}/>} />
+          <Route path="/courses/:id/lessons/new" element={<LessonForm />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/*" element={<Navigate to="/home" />} />
         </Routes>

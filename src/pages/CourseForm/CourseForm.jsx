@@ -6,7 +6,7 @@ import blueBoard from "../../assets/images/blue-board.svg";
 import * as lmsAPI from "../../utilities/lms-api";
 
 export default function CourseForm({ createCourse, editCourse, deleteCourse }) {
-    const initialState = { title: "", instructor: "", description: "" }
+    const initialState = { title: "", instructor: "", description: "", category: "" }
 
     const [currCourse, setCurrCourse] = useState(null);
     const { id } = useParams();
@@ -97,6 +97,20 @@ export default function CourseForm({ createCourse, editCourse, deleteCourse }) {
                                 maxLength="100"
                                 required
                                 id="id_instructor"
+                                onChange={handleChange}
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><label htmlFor="id_category">Category:</label></th>
+                        <td>
+                            <input
+                                value={formData.category}
+                                type="text"
+                                name="category"
+                                maxLength="200"
+                                required
+                                id="id_category"
                                 onChange={handleChange}
                             />
                         </td>

@@ -1,5 +1,6 @@
 import sendRequest from "./sendRequest";
 const url = "/courses/"
+const lessonsUrl = "/lessons/"
 
 export async function coursesIndex() {
     return sendRequest(url)
@@ -19,4 +20,16 @@ export async function updateCourse(formData, id) {
 
 export async function deleteCourse(id) {
     return sendRequest(`${url}${id}/`, 'DELETE')
+}
+
+export async function createLesson(data) {
+    return sendRequest(lessonsUrl, 'POST', data)
+}
+
+export async function lessonsIndex() {
+    return sendRequest(lessonsUrl)
+}
+
+export async function addCover(id, data) {
+    return sendRequest(`${url}${id}/cover/`, 'POST', data)
 }
