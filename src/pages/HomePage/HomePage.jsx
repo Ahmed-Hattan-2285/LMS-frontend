@@ -26,7 +26,7 @@ export default function HomePage({ user, setUser }) {
   }
 
   return (
-    <>
+    <div className="home-page-container">
       <section className="logo-container">
         <div className="home-lms-container">
           <h1>Learning Management System</h1>
@@ -37,7 +37,7 @@ export default function HomePage({ user, setUser }) {
         <img src={LMSLogo} alt="Text reads: Learning Management System" />
       </section>
       {!user && (
-        <section>
+        <section className="login-container">
           <form onSubmit={handleLogin} className="form-container login">
             <h1>Login</h1>
             <p>
@@ -69,6 +69,6 @@ export default function HomePage({ user, setUser }) {
           </form>
         </section>
       )}
-    </>
+    </div>
   );
 }

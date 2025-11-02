@@ -2,11 +2,14 @@ import "./styles.css";
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router";
 import * as lmsAPI from "../../utilities/lms-api";
+import * as usersAPI from "../../utilities/users-api";
 import blueBoard from "../../assets/images/blue-board.svg";
 import AddCoverForm from "../../components/Forms/AddCoverForm";
+import ReviewForm from "../../components/Forms/ReviewForm";
 
 export default function CourseDetail() {
     const [courseDetail, setCourseDetail] = useState(null);
+    const [user, setUser] = useState(null);
     const { id } = useParams();
 
     useEffect(() => {
@@ -22,6 +25,14 @@ export default function CourseDetail() {
         if (id) getAndSetDetail();
     }, [id]);
 
+    useEffect(() => {
+        async function getUser() {
+            const foundUser = await usersAPI.getUser();
+            setUser(foundUser);
+        }
+        getUser();
+    }, []);
+
     async function addCover(id, formData) {
         try {
             await lmsAPI.addCover(id, formData);
@@ -29,6 +40,28 @@ export default function CourseDetail() {
             setCourseDetail(updatedCourse);
         } catch (err) {
             console.error(err);
+        }
+    }
+
+    async function addReview(reviewData) {
+        try {
+            await lmsAPI.createReview({ ...reviewData, course: parseInt(id) });
+            const updatedCourse = await lmsAPI.courseDetail(id);
+            setCourseDetail(updatedCourse);
+        } catch (err) {
+            console.error(err);
+            throw err;
+        }
+    }
+
+    async function updateReview(reviewId, reviewData) {
+        try {
+            await lmsAPI.updateReview(reviewId, reviewData);
+            const updatedCourse = await lmsAPI.courseDetail(id);
+            setCourseDetail(updatedCourse);
+        } catch (err) {
+            console.error(err);
+            throw err;
         }
     }
 
@@ -64,13 +97,23 @@ export default function CourseDetail() {
                             <strong>Lessons:</strong> {courseDetail.lessons.length}
                         </div>
                     )}
+                    {courseDetail.average_rating !== null && courseDetail.average_rating !== undefined && (
+                        <div className="course-meta-item">
+                            <strong>Rating:</strong> ⭐ {courseDetail.average_rating}/5 
+                            {courseDetail.rating_count > 0 && (
+                                <span> ({courseDetail.rating_count} {courseDetail.rating_count === 1 ? 'review' : 'reviews'})</span>
+                            )}
+                        </div>
+                    )}
                 </div>
                 <p>{courseDetail.description}</p>
             </div>
             <div className="course-lessons">
                 <div className="course-lessons-header">
                     <h3>Lessons</h3>
-                    <Link to={`/courses/${courseDetail.id}/lessons/new`} className="btn">Add Lesson</Link>
+                    {user && user.role === 'instructor' && (
+                        <Link to={`/courses/${courseDetail.id}/lessons/new`} className="btn">Add Lesson</Link>
+                    )}
                 </div>
                 {courseDetail.lessons && courseDetail.lessons.length > 0 ? (
                     <ul>
@@ -90,13 +133,53 @@ export default function CourseDetail() {
                     <p>No lessons yet.</p>
                 )}
             </div>
-            <div className="course-actions">
-                <Link to={`/courses/${courseDetail.id}/edit`} className="edit btn">Edit</Link>
-                <Link to={`/courses/confirm_delete/${courseDetail.id}`} className="delete btn">Delete</Link>
+            {user && user.role === 'instructor' && (
+                <div className="course-actions">
+                    <Link to={`/courses/${courseDetail.id}/edit`} className="edit btn">Edit</Link>
+                    <Link to={`/courses/confirm_delete/${courseDetail.id}`} className="delete btn">Delete</Link>
+                </div>
+            )}
+            <div className="course-reviews">
+                <h3>Reviews</h3>
+                {courseDetail.reviews && courseDetail.reviews.length > 0 ? (
+                    <div className="reviews-list">
+                        {courseDetail.reviews.map(review => (
+                            <div key={review.id} className="review-item">
+                                <div className="review-header">
+                                    <strong>
+                                        {review.student.first_name || review.student.last_name 
+                                            ? `${review.student.first_name || ''} ${review.student.last_name || ''}`.trim()
+                                            : review.student.username}
+                                    </strong>
+                                    <span className="review-rating"> ⭐ {review.rating}/5</span>
+                                    <span className="review-date">
+                                        {new Date(review.created_at).toLocaleDateString()}
+                                    </span>
+                                </div>
+                                {review.comment && (
+                                    <p className="review-comment">{review.comment}</p>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <p>No reviews yet. Be the first to review this course!</p>
+                )}
+                {user && user.role === 'student' && (
+                    <ReviewForm 
+                        courseId={courseDetail.id} 
+                        addReview={addReview}
+                        updateReview={updateReview}
+                        courseDetail={courseDetail}
+                        user={user}
+                    />
+                )}
             </div>
-            <section className="photo-form-section">
-                <AddCoverForm id={courseDetail.id} addCover={addCover} />
-            </section>
+            {user && user.role === 'instructor' && (
+                <section className="photo-form-section">
+                    <AddCoverForm id={courseDetail.id} addCover={addCover} />
+                </section>
+            )}
         </section>
     );
 }

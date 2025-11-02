@@ -33,3 +33,20 @@ export async function lessonsIndex() {
 export async function addCover(id, data) {
     return sendRequest(`${url}${id}/cover/`, 'POST', data)
 }
+
+export async function reviewsIndex(courseId = null) {
+    const url = courseId ? `/reviews/?course_id=${courseId}` : '/reviews/'
+    return sendRequest(url)
+}
+
+export async function createReview(data) {
+    return sendRequest('/reviews/', 'POST', data)
+}
+
+export async function updateReview(id, data) {
+    return sendRequest(`/reviews/${id}/`, 'PUT', data)
+}
+
+export async function deleteReview(id) {
+    return sendRequest(`/reviews/${id}/`, 'DELETE')
+}

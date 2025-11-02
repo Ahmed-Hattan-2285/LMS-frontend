@@ -80,126 +80,104 @@ export default function SignupPage({ setUser }) {
     }
 
     return (
-        <>
+        <div className="signup-page-container">
             <div className="page-header">
                 <h1>Sign Up</h1>
                 <img src={blueBoard} alt="A board illustration" />
             </div>
             <form onSubmit={handleSubmit} className="form-container signup">
-                <table>
-                    <tbody>
-                        <tr>
-                            <th><label htmlFor="id_first_name">First Name:</label></th>
-                            <td>
-                                <input 
-                                    type="text" 
-                                    value={formData.first_name} 
-                                    name="first_name" 
-                                    id="id_first_name"
-                                    minLength="1" 
-                                    maxLength="150" 
-                                    onChange={handleChange} 
-                                />
-                                <br/>
-                                {errors.first_name && <p className="error-text">{errors.first_name}</p>}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><label htmlFor="id_last_name">Last Name:</label></th>
-                            <td>
-                                <input 
-                                    type="text" 
-                                    value={formData.last_name} 
-                                    name="last_name" 
-                                    id="id_last_name"
-                                    minLength="1" 
-                                    maxLength="150" 
-                                    onChange={handleChange} 
-                                />
-                                <br/>
-                                {errors.last_name && <p className="error-text">{errors.last_name}</p>}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><label htmlFor="id_username">Username:</label></th>
-                            <td>
-                                <input 
-                                    type="text" 
-                                    value={formData.username} 
-                                    name="username" 
-                                    id="id_username"
-                                    minLength="3" 
-                                    maxLength="150" 
-                                    onChange={handleChange} 
-                                />
-                                <br/>
-                                {errors.username && <p className="error-text">{errors.username}</p>}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><label htmlFor="id_email">Email:</label></th>
-                            <td>
-                                <input 
-                                    type="text" 
-                                    value={formData.email} 
-                                    name="email" 
-                                    id="id_email"
-                                    minLength="3" 
-                                    maxLength="150" 
-                                    onChange={handleChange} 
-                                />
-                                <br/>
-                                {errors.email && <p className="error-text">{errors.email}</p>}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><label htmlFor="id_role">Role:</label></th>
-                            <td>
-                                <select
-                                    name="role"
-                                    id="id_role"
-                                    value={formData.role}
-                                    onChange={handleChange}
-                                    required
-                                >
-                                    <option value="student">Student</option>
-                                    <option value="instructor">Instructor</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><label htmlFor="id_password">Password:</label></th>
-                            <td>
-                                <input 
-                                    type="password" 
-                                    value={formData.password} 
-                                    name="password" 
-                                    id="id_password"
-                                    minLength="3" 
-                                    onChange={handleChange} 
-                                />
-                                <br/>
-                                {errors.password && <p className="error-text">{errors.password}</p>}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><label htmlFor="id_password2">Password confirmation:</label></th>
-                            <td>
-                                <input 
-                                    type="password" 
-                                    value={formData.confirmPassword} 
-                                    name="confirmPassword" 
-                                    id="id_password2"
-                                    onChange={handleChange}
-                                />
-                                <br/>
-                                {errors.confirmPassword && <p className="error-text">{errors.confirmPassword}</p>}
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <button type="submit" disabled={disabledSubmitBtn} className="btn submit">Submit!</button>
+                <div className="form-grid">
+                    <div className="form-group half-width">
+                        <label htmlFor="id_first_name">First Name:</label>
+                        <input 
+                            type="text" 
+                            value={formData.first_name} 
+                            name="first_name" 
+                            id="id_first_name"
+                            minLength="1" 
+                            maxLength="150" 
+                            onChange={handleChange} 
+                        />
+                        {errors.first_name && <p className="error-text">{errors.first_name}</p>}
+                    </div>
+                    <div className="form-group half-width">
+                        <label htmlFor="id_last_name">Last Name:</label>
+                        <input 
+                            type="text" 
+                            value={formData.last_name} 
+                            name="last_name" 
+                            id="id_last_name"
+                            minLength="1" 
+                            maxLength="150" 
+                            onChange={handleChange} 
+                        />
+                        {errors.last_name && <p className="error-text">{errors.last_name}</p>}
+                    </div>
+                    <div className="form-group full-width">
+                        <label htmlFor="id_username">Username:</label>
+                        <input 
+                            type="text" 
+                            value={formData.username} 
+                            name="username" 
+                            id="id_username"
+                            minLength="3" 
+                            maxLength="150" 
+                            onChange={handleChange} 
+                        />
+                        {errors.username && <p className="error-text">{errors.username}</p>}
+                    </div>
+                    <div className="form-group full-width">
+                        <label htmlFor="id_email">Email:</label>
+                        <input 
+                            type="email" 
+                            value={formData.email} 
+                            name="email" 
+                            id="id_email"
+                            minLength="3" 
+                            maxLength="150" 
+                            onChange={handleChange} 
+                        />
+                        {errors.email && <p className="error-text">{errors.email}</p>}
+                    </div>
+                    <div className="form-group full-width">
+                        <label htmlFor="id_role">Role:</label>
+                        <select
+                            name="role"
+                            id="id_role"
+                            value={formData.role}
+                            onChange={handleChange}
+                            required
+                        >
+                            <option value="student">Student</option>
+                            <option value="instructor">Instructor</option>
+                        </select>
+                    </div>
+                    <div className="form-group half-width">
+                        <label htmlFor="id_password">Password:</label>
+                        <input 
+                            type="password" 
+                            value={formData.password} 
+                            name="password" 
+                            id="id_password"
+                            minLength="3" 
+                            onChange={handleChange} 
+                        />
+                        {errors.password && <p className="error-text">{errors.password}</p>}
+                    </div>
+                    <div className="form-group half-width">
+                        <label htmlFor="id_password2">Confirm Password:</label>
+                        <input 
+                            type="password" 
+                            value={formData.confirmPassword} 
+                            name="confirmPassword" 
+                            id="id_password2"
+                            onChange={handleChange}
+                        />
+                        {errors.confirmPassword && <p className="error-text">{errors.confirmPassword}</p>}
+                    </div>
+                </div>
+                <button type="submit" disabled={disabledSubmitBtn} className="btn submit">Create Account</button>
             </form>
-        </>
+        </div>
     );
 }

@@ -1,12 +1,56 @@
+.signup-page-container {
+  min-height: calc(100vh - 80px);
+  padding: 3rem 1rem;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.signup-page-container::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(0, 88, 178, 0.05) 0%, transparent 70%);
+  animation: pulse 8s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
 .page-header {
   text-align: center;
-  padding: 3rem 2rem 2rem;
+  padding: 2rem 1rem 3rem;
   max-width: 1200px;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  animation: slideDown 0.6s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .page-header h1 {
-  font-size: 3.5rem;
+  font-size: 3rem;
   font-weight: 700;
   background: linear-gradient(135deg, #0058b2 0%, #003f7f 100%);
   -webkit-background-clip: text;
@@ -14,50 +58,118 @@
   background-clip: text;
   margin-bottom: 1.5rem;
   line-height: 1.2;
+  position: relative;
+  display: inline-block;
+}
+
+.page-header h1::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(135deg, #0058b2 0%, #003f7f 100%);
+  border-radius: 2px;
 }
 
 .page-header img {
   width: 120px;
   height: 120px;
   object-fit: contain;
-  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
+  filter: drop-shadow(0 4px 12px rgba(0, 63, 127, 0.2));
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 .error-text {
   color: #dc3545;
   font-size: 0.875rem;
-  margin-top: 0.25rem;
+  margin-top: 0.5rem;
   margin-bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.error-text::before {
+  content: '⚠';
+  font-size: 1rem;
 }
 
 .form-container.signup {
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
-  padding: 2rem;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  padding: 3rem;
+  position: relative;
+  z-index: 1;
+  animation: slideUp 0.6s ease-out 0.2s both;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.form-container.signup table {
-  width: 100%;
-  border-collapse: collapse;
+.form-container.signup:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form-container.signup .form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
   margin-bottom: 2rem;
 }
 
-.form-container.signup tr {
-  border-bottom: 1px solid #e0e0e0;
+.form-container.signup .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
-.form-container.signup th {
-  padding: 1.25rem 1rem;
-  text-align: left;
-  vertical-align: top;
-  width: 30%;
+.form-container.signup .form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-container.signup .form-group.half-width {
+  grid-column: span 1;
+}
+
+.form-container.signup label {
   font-weight: 600;
   color: #003f7f;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
-.form-container.signup td {
-  padding: 1.25rem 1rem;
-  vertical-align: top;
+.form-container.signup label::before {
+  content: '→';
+  color: #0058b2;
+  font-weight: bold;
+  opacity: 0.6;
 }
 
 .form-container.signup input[type="text"],
@@ -65,13 +177,14 @@
 .form-container.signup input[type="email"],
 .form-container.signup select {
   width: 100%;
-  padding: 0.75rem 1rem;
+  padding: 0.875rem 1.25rem;
   font-size: 1rem;
   border: 2px solid #e0e0e0;
-  border-radius: 6px;
+  border-radius: 10px;
   font-family: inherit;
-  transition: border-color 0.3s ease;
-  background-color: white;
+  transition: all 0.3s ease;
+  background-color: #fafafa;
+  box-sizing: border-box;
 }
 
 .form-container.signup input[type="text"]:focus,
@@ -80,77 +193,136 @@
 .form-container.signup select:focus {
   outline: none;
   border-color: #0058b2;
+  background-color: white;
+  box-shadow: 0 0 0 3px rgba(0, 88, 178, 0.1);
+  transform: translateY(-2px);
 }
 
-.form-container.signup input[type="text"]:invalid,
-.form-container.signup input[type="password"]:invalid,
-.form-container.signup input[type="email"]:invalid {
+.form-container.signup input[type="text"]:hover,
+.form-container.signup input[type="password"]:hover,
+.form-container.signup input[type="email"]:hover,
+.form-container.signup select:hover {
+  border-color: #0058b2;
+  background-color: white;
+}
+
+.form-container.signup input[type="text"]:invalid:not(:focus):not(:placeholder-shown),
+.form-container.signup input[type="password"]:invalid:not(:focus):not(:placeholder-shown),
+.form-container.signup input[type="email"]:invalid:not(:focus):not(:placeholder-shown) {
   border-color: #dc3545;
 }
 
 .btn.submit {
   display: block;
-  margin: 0 auto;
-  padding: 0.875rem 2rem;
+  margin: 2rem auto 0;
+  padding: 1rem 3rem;
   font-size: 1.1rem;
   font-weight: 600;
   color: white;
   background: linear-gradient(135deg, #0058b2 0%, #003f7f 100%);
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
   width: fit-content;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 88, 178, 0.3);
+}
+
+.btn.submit::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn.submit:hover::before:not(:disabled) {
+  width: 300px;
+  height: 300px;
 }
 
 .btn.submit:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 88, 178, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 88, 178, 0.4);
+}
+
+.btn.submit:active:not(:disabled) {
+  transform: translateY(-1px);
 }
 
 .btn.submit:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+  transform: none;
 }
 
 @media (max-width: 768px) {
+  .signup-page-container {
+    padding: 2rem 1rem;
+  }
+
+  .page-header {
+    padding: 1.5rem 1rem 2rem;
+  }
+
+  .page-header h1 {
+    font-size: 2.5rem;
+  }
+
+  .page-header img {
+    width: 100px;
+    height: 100px;
+  }
+
   .form-container.signup {
-    padding: 1.5rem 1rem;
+    padding: 2rem 1.5rem;
+    border-radius: 16px;
   }
 
-  .form-container.signup th,
-  .form-container.signup td {
-    padding: 1rem 0.75rem;
+  .form-container.signup .form-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
   }
 
-  .form-container.signup th {
-    width: 35%;
-    font-size: 0.95rem;
+  .form-container.signup .form-group.full-width,
+  .form-container.signup .form-group.half-width {
+    grid-column: 1;
   }
 }
 
 @media (max-width: 480px) {
-  .form-container.signup table {
-    display: block;
+  .page-header h1 {
+    font-size: 2rem;
   }
 
-  .form-container.signup tr {
-    display: block;
-    border-bottom: 2px solid #e0e0e0;
-    margin-bottom: 1rem;
-    padding-bottom: 1rem;
+  .page-header img {
+    width: 80px;
+    height: 80px;
   }
 
-  .form-container.signup th {
-    display: block;
+  .form-container.signup {
+    padding: 1.5rem 1rem;
+  }
+
+  .form-container.signup input[type="text"],
+  .form-container.signup input[type="password"],
+  .form-container.signup input[type="email"],
+  .form-container.signup select {
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  .btn.submit {
+    padding: 0.875rem 2rem;
+    font-size: 1rem;
     width: 100%;
-    padding: 0 0 0.5rem 0;
-    border-bottom: none;
-  }
-
-  .form-container.signup td {
-    display: block;
-    width: 100%;
-    padding: 0;
+    max-width: 100%;
   }
 }

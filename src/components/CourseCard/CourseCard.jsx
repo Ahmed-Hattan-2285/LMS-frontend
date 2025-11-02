@@ -13,17 +13,27 @@ export default function CourseCard({ course }) {
                         : <img src={courseBoard} alt="Course board illustration" />}
                     <h2>{course.title}</h2>
                     <p>{course.description}</p>
-                    <p>
+                    <div className="course-meta">
                         {course.instructor && (
-                            <span>
-                                Instructor: <strong>
-                                    {course.instructor.first_name || course.instructor.last_name 
-                                        ? `${course.instructor.first_name || ''} ${course.instructor.last_name || ''}`.trim()
-                                        : course.instructor.username}
-                                </strong>
-                            </span>
+                            <p>
+                                <span>
+                                    Instructor: <strong>
+                                        {course.instructor.first_name || course.instructor.last_name 
+                                            ? `${course.instructor.first_name || ''} ${course.instructor.last_name || ''}`.trim()
+                                            : course.instructor.username}
+                                    </strong>
+                                </span>
+                            </p>
                         )}
-                    </p>
+                        {course.average_rating !== null && course.average_rating !== undefined && (
+                            <p className="course-rating">
+                                ⭐ {course.average_rating}/5 
+                                {course.rating_count > 0 && (
+                                    <span className="rating-count">({course.rating_count} {course.rating_count === 1 ? 'review' : 'reviews'})</span>
+                                )}
+                            </p>
+                        )}
+                    </div>
                 </div>
             </Link>
         </div>
