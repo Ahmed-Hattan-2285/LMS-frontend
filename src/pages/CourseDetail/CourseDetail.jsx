@@ -36,6 +36,14 @@ export default function CourseDetail() {
 
     return (
         <section className="detail-course-container">
+            <div className="course-header">
+                <h1>{courseDetail.title}</h1>
+                <h2>
+                    {courseDetail.instructor
+                        ? `Instructor: ${courseDetail.instructor}`
+                        : "No instructor listed."}
+                </h2>
+            </div>
             <div className="detail-course-img">
                 {courseDetail.course_cover?.url
                     ? <img src={courseDetail.course_cover.url} alt={`Cover for course ${courseDetail.title}`} />
@@ -43,12 +51,18 @@ export default function CourseDetail() {
                 }
             </div>
             <div className="course-details">
-                <h1>{courseDetail.title}</h1>
-                <h2>
-                    {courseDetail.instructor
-                        ? `Instructor: ${courseDetail.instructor}`
-                        : "No instructor listed."}
-                </h2>
+                <div className="course-meta">
+                    {courseDetail.category && (
+                        <div className="course-meta-item">
+                            <strong>Category:</strong> {courseDetail.category}
+                        </div>
+                    )}
+                    {courseDetail.lessons && courseDetail.lessons.length > 0 && (
+                        <div className="course-meta-item">
+                            <strong>Lessons:</strong> {courseDetail.lessons.length}
+                        </div>
+                    )}
+                </div>
                 <p>{courseDetail.description}</p>
             </div>
             <div className="course-lessons">
