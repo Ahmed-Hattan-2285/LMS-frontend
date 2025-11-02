@@ -16,7 +16,11 @@ export default function CourseCard({ course }) {
                     <p>
                         {course.instructor && (
                             <span>
-                                Instructor: <strong>{course.instructor}</strong>
+                                Instructor: <strong>
+                                    {course.instructor.first_name || course.instructor.last_name 
+                                        ? `${course.instructor.first_name || ''} ${course.instructor.last_name || ''}`.trim()
+                                        : course.instructor.username}
+                                </strong>
                             </span>
                         )}
                     </p>

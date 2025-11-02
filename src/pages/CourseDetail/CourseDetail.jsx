@@ -40,7 +40,9 @@ export default function CourseDetail() {
                 <h1>{courseDetail.title}</h1>
                 <h2>
                     {courseDetail.instructor
-                        ? `Instructor: ${courseDetail.instructor}`
+                        ? `Instructor: ${courseDetail.instructor.first_name || courseDetail.instructor.last_name 
+                            ? `${courseDetail.instructor.first_name || ''} ${courseDetail.instructor.last_name || ''}`.trim()
+                            : courseDetail.instructor.username} (${courseDetail.instructor.username})`
                         : "No instructor listed."}
                 </h2>
             </div>

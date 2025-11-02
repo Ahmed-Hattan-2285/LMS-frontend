@@ -60,13 +60,14 @@ export default function SignupPage({ setUser }) {
         try {
             evt.preventDefault();
             console.log("checking handle submit signup");
-            // Transform formData to match backend expectations
             const signupData = {
                 username: formData.username,
                 email: formData.email,
                 password: formData.password,
+                password2: formData.confirmPassword,
                 first_name: formData.first_name,
-                last_name: formData.last_name
+                last_name: formData.last_name,
+                role: formData.role
             };
             const newUser = await usersAPI.signup(signupData);
             setUser(newUser);

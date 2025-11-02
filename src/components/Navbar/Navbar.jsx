@@ -2,7 +2,7 @@ import "./styles.css";
 import { Link, useLocation } from 'react-router';
 import redBoardLogo from '../../assets/images/red-board.svg';
 
-export default function Navbar({ user, isLoading, onLogout }) {
+export default function Navbar({ user, onLogout }) {
   const location = useLocation();
   const routes = ["home", "courses", "about"];
   const mainCSS = routes.filter(r => location.pathname.includes(r) ? r : "").join(" ");
@@ -25,21 +25,19 @@ export default function Navbar({ user, isLoading, onLogout }) {
             <li><Link to="/about">About</Link></li>
           </ul>
           <div className="nav-auth">
-            {!isLoading && (
-              user ? (
-                <div className="user-menu">
-                  <span className="user-info">
-                    <span className="user-name">{user.username}</span>
-                    <span className="user-role">({user.role})</span>
-                  </span>
-                  <button onClick={onLogout} className="logout-btn">Logout</button>
-                </div>
-              ) : (
-                <div className="auth-links">
-                  <Link to="/login" className="login-btn">Login</Link>
-                  <Link to="/register" className="register-btn">Sign Up</Link>
-                </div>
-              )
+            {user ? (
+              <div className="user-menu">
+                <span className="user-info">
+                  <span className="user-name">{user.username}</span>
+                  <span className="user-role">({user.role_display || user.role || 'user'})</span>
+                </span>
+                <button onClick={onLogout} className="logout-btn">Logout</button>
+              </div>
+            ) : (
+              <div className="auth-links">
+                <Link to="/login" className="login-btn">Login</Link>
+                <Link to="/register" className="register-btn">Sign Up</Link>
+              </div>
             )}
           </div>
         </nav>
