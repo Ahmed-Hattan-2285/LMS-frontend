@@ -65,6 +65,17 @@ export default function CourseDetail() {
         }
     }
 
+    async function deleteReview(reviewId) {
+        try {
+            await lmsAPI.deleteReview(reviewId);
+            const updatedCourse = await lmsAPI.courseDetail(id);
+            setCourseDetail(updatedCourse);
+        } catch (err) {
+            console.error(err);
+            throw err;
+        }
+    }
+
     if (!courseDetail) return <h3>Your course details will display soon</h3>;
 
     return (
@@ -170,6 +181,7 @@ export default function CourseDetail() {
                         courseId={courseDetail.id} 
                         addReview={addReview}
                         updateReview={updateReview}
+                        deleteReview={deleteReview}
                         courseDetail={courseDetail}
                         user={user}
                     />

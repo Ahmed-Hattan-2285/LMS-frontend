@@ -19,7 +19,12 @@ export default function CourseForm({ createCourse, editCourse, deleteCourse }) {
             try {
                 const course = await lmsAPI.courseDetail(id);
                 setCurrCourse(course);
-                setFormData(course)
+                setFormData({
+                    title: course.title || "",
+                    instructor: course.instructor?.id || "",
+                    description: course.description || "",
+                    category: course.category || ""
+                })
             } catch (err) {
                 console.log(err)
                 setCurrCourse(null)
@@ -37,11 +42,26 @@ export default function CourseForm({ createCourse, editCourse, deleteCourse }) {
     async function handleSubmit(evt) {
         try {
             evt.preventDefault();
-            const newCourse = editCourse ? await lmsAPI.updateCourse(formData, currCourse.id) : await lmsAPI.createCourse(formData);
+            let submitData;
+            
+            if (editCourse) {
+                submitData = {
+                    title: formData.title,
+                    description: formData.description,
+                    category: formData.category
+                };
+            } else {
+                submitData = { ...formData };
+                delete submitData.instructor;
+            }
+            
+            const newCourse = editCourse ? await lmsAPI.updateCourse(submitData, currCourse.id) : await lmsAPI.createCourse(submitData);
             setFormData(initialState);
             navigate(`/courses/${newCourse.id}`);
         } catch (err) {
-            console.log(err);
+            console.error('Course update/create error:', err);
+            console.error('Error data:', err.data);
+            console.error('Error status:', err.status);
         }
     }
     async function handleDelete(evt) {
@@ -87,20 +107,44 @@ export default function CourseForm({ createCourse, editCourse, deleteCourse }) {
                             />
                         </td>
                     </tr>
-                    <tr>
-                        <th><label htmlFor="id_instructor">Instructor:</label></th>
-                        <td>
-                            <input
-                                value={formData.instructor}
-                                type="text"
-                                name="instructor"
-                                maxLength="100"
-                                required
-                                id="id_instructor"
-                                onChange={handleChange}
-                            />
-                        </td>
-                    </tr>
+                    {editCourse && currCourse && (
+                        <tr>
+                            <th><label htmlFor="id_instructor">Instructor:</label></th>
+                            <td>
+                                <input
+                                    value={currCourse.instructor ? 
+                                        (currCourse.instructor.first_name || currCourse.instructor.last_name 
+                                            ? `${currCourse.instructor.first_name || ''} ${currCourse.instructor.last_name || ''}`.trim()
+                                            : currCourse.instructor.username) 
+                                        : ''}
+                                    type="text"
+                                    name="instructor"
+                                    id="id_instructor"
+                                    disabled
+                                    readOnly
+                                    style={{ background: '#f5f5f5', cursor: 'not-allowed' }}
+                                />
+                            </td>
+                        </tr>
+                    )}
+                    {!editCourse && (
+                        <tr>
+                            <th><label htmlFor="id_instructor">Instructor:</label></th>
+                            <td>
+                                <input
+                                    value={formData.instructor}
+                                    type="text"
+                                    name="instructor"
+                                    maxLength="100"
+                                    disabled
+                                    readOnly
+                                    id="id_instructor"
+                                    style={{ background: '#f5f5f5', cursor: 'not-allowed' }}
+                                    placeholder="Instructor will be set automatically"
+                                />
+                            </td>
+                        </tr>
+                    )}
                     <tr>
                         <th><label htmlFor="id_category">Category:</label></th>
                         <td>

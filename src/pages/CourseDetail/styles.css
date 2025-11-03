@@ -409,12 +409,22 @@
   border-color: #0058b2;
 }
 
+.review-form-actions {
+  display: flex;
+  gap: 0.1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  
+}
+
 .course-reviews form .btn.submit {
   padding: 0.875rem 2rem;
   background: linear-gradient(135deg, #0058b2 0%, #003f7f 100%);
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   cursor: pointer;
   font-weight: 600;
   transition: all 0.3s ease;
@@ -423,6 +433,23 @@
 .course-reviews form .btn.submit:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 88, 178, 0.3);
+}
+
+.course-reviews form .btn.delete-review {
+  padding: 0.875rem 1.5rem;
+  background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.course-reviews form .btn.delete-review:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+  background: linear-gradient(135deg, #c82333 0%, #bd2130 100%);
 }
 
 
@@ -448,6 +475,15 @@
   .detail-course-container {
     padding: 1.5rem 1rem;
     gap: 1.5rem;
+  }
+
+  .review-form-actions {
+    flex-direction: column;
+  }
+
+  .review-form-actions .btn {
+    width: 100%;
+    text-align: center;
   }
 
   .course-header {

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export default function ReviewForm({ courseId, addReview, updateReview, courseDetail, user }) {
+export default function ReviewForm({ courseId, addReview, updateReview, deleteReview, courseDetail, user }) {
     const [formData, setFormData] = useState({
         rating: 5,
         comment: ""
@@ -72,13 +72,45 @@ export default function ReviewForm({ courseId, addReview, updateReview, courseDe
         }
     }
 
+    async function handleDelete(evt) {
+        evt.preventDefault();
+        if (!existingReview || !deleteReview) return;
+        
+        const confirmed = window.confirm("Are you sure you want to delete your review? This action cannot be undone.");
+        if (!confirmed) return;
+
+        setError("");
+        try {
+            await deleteReview(existingReview.id);
+            setExistingReview(null);
+            setFormData({ rating: 5, comment: "" });
+        } catch (err) {
+            console.error('Delete review error:', err);
+            if (err.data) {
+                if (typeof err.data === 'object' && !Array.isArray(err.data)) {
+                    if (err.data.error) {
+                        setError(err.data.error);
+                    } else {
+                        setError(err.data.error || "Failed to delete review");
+                    }
+                } else if (typeof err.data === 'string') {
+                    setError(err.data);
+                } else {
+                    setError(err.data.error || "Failed to delete review");
+                }
+            } else {
+                setError(err.message || "Failed to delete review");
+            }
+        }
+    }
+
     return (
         <form onSubmit={handleSubmit}>
             <h3>{existingReview ? "Update Your Review" : "Write a Review"}</h3>
             {error && <p className="error-message">{error}</p>}
             {existingReview && (
                 <p className="info-message" style={{ color: '#0058b2', fontSize: '0.9rem', marginBottom: '1rem' }}>
-                    You've already reviewed this course. Update your review below:
+                    You've already reviewed this course. Update your review below or delete it:
                 </p>
             )}
             <p>
@@ -106,9 +138,16 @@ export default function ReviewForm({ courseId, addReview, updateReview, courseDe
                     placeholder="Share your thoughts about this course..."
                 />
             </p>
-            <button type="submit" className="btn submit">
-                {existingReview ? "Update Review" : "Submit Review"}
-            </button>
+            <div className="review-form-actions">
+                <button type="submit" className="btn submit">
+                    {existingReview ? "Update Review" : "Submit Review"}
+                </button>
+                {existingReview && deleteReview && (
+                    <button type="button" onClick={handleDelete} className="btn delete-review">
+                        Delete Review
+                    </button>
+                )}
+            </div>
         </form>
     );
 }
