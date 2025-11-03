@@ -132,7 +132,14 @@ export default function CourseForm({ createCourse, editCourse, deleteCourse }) {
                     </tr>
                 </tbody>
             </table>
-            <button type="submit" className="btn end submit">Submit!</button>
+            <div className="form-actions">
+                {editCourse ? (
+                    <Link to={`/courses/${currCourse.id}`} className="btn secondary">Cancel</Link>
+                ) : (
+                    <Link to="/courses" className="btn secondary">Cancel</Link>
+                )}
+                <button type="submit" className="btn submit">Submit!</button>
+            </div>
         </form>
     </>)
 }

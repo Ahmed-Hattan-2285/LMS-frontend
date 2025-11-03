@@ -10,6 +10,8 @@ import LessonForm from '../LessonForm/LessonForm';
 import AuthPage from '../AuthPage/AuthPage';
 import SignupPage from '../SignupPage/SignupPage';
 import Navbar from '../../components/Navbar/Navbar';
+import Sidebar from '../../components/Sidebar/Sidebar';
+import redBoardLogo from '../../assets/images/red-board.svg';
 import * as usersAPI from '../../utilities/users-api';
 
 export default function App() {
@@ -28,11 +30,31 @@ export default function App() {
     setUser(null);
   }
 
+  const isInstructor = user && user.role === 'instructor';
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
+
   return (
     <>
-      <Navbar user={user} onLogout={handleLogout} />
-      <main>
-        <Routes>
+      {!isInstructor && <Navbar user={user} onLogout={handleLogout} />}
+      {isInstructor && <div className="instructor-header">
+        <div className="instructor-header-content">
+          <div className="instructor-logo">
+            <img src={redBoardLogo} alt="Learning Management System Logo" />
+          </div>
+          <div className="instructor-actions">
+            <span className="instructor-name">{user?.username}</span>
+            <button onClick={handleLogout} className="instructor-logout">Logout</button>
+          </div>
+        </div>
+      </div>}
+      <div className="app-container">
+        {isInstructor && <Sidebar user={user} isOpen={sidebarOpen} onToggle={toggleSidebar} />}
+        <main className={isInstructor && sidebarOpen ? 'with-sidebar' : ''}>
+          <Routes>
           {user ? <>
             <Route path="/" element={<HomePage user={user} setUser={setUser} />} />
             <Route path="/about" element={<AboutPage />} />
@@ -51,8 +73,9 @@ export default function App() {
             <Route path="/register" element={<AuthPage isLogin={false} setUser={setUser} />} />
             <Route path="/*" element={<Navigate to="/" />} />
           </>}
-        </Routes>
-      </main>
+          </Routes>
+        </main>
+      </div>
     </>
   );
 }

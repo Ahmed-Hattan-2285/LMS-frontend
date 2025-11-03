@@ -95,7 +95,7 @@
 
 .btn {
   display: inline-block;
-  padding: 0.75rem 2rem;
+  padding: 1.75rem 3rem;
   font-size: 1.1rem;
   font-weight: 600;
   color: white;
@@ -120,6 +120,27 @@
   display: block;
   margin: 0 auto;
   width: fit-content;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.btn.secondary {
+  background: #6c757d;
+  background: linear-gradient(135deg, #0058b2 0%, #003f7f 100%);
+}
+
+.btn.secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 88, 178, 0.3);
+}
+
+.btn.submit {
+  background: linear-gradient(135deg, #0058b2 0%, #003f7f 100%);
 }
 
 @media (max-width: 768px) {
@@ -189,5 +210,14 @@
     width: 100%;
     padding: 0;
   }
-}
 
+  .form-actions {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .form-actions .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
