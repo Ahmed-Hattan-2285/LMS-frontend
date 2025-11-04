@@ -62,5 +62,7 @@ RESTful Routing for LMS
     <tbody>
         <tr><td>/reviews</td><td>{ReviewsIndexPage}</td><td>View all reviews</td></tr>
         <tr><td>/reviews/new</td><td>{ReviewFormPage}</td><td>Form for Student to add a new review</td></tr>
+        <tr><td>/reviews/:id/edit</td><td>{ReviewFormPage}</td><td>Form for Student to Edit an existing review</td></tr>
+        <tr><td>/reviews/:id/delete</td><td>{ReviewFormPage}</td><td>Form for Student to Remove a review</td></tr>
     </tbody>
 </table>
