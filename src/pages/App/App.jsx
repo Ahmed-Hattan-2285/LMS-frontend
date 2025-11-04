@@ -63,7 +63,9 @@ export default function App() {
             <Route path="/courses/new" element={<CourseForm createCourse={true}/>} />
             <Route path="/courses/:id/edit" element={<CourseForm editCourse={true}/>} />
             <Route path="/courses/confirm_delete/:id" element={<CourseForm deleteCourse={true}/>} />
-            <Route path="/courses/:id/lessons/new" element={<LessonForm />} />
+            <Route path="/courses/:id/lessons/new" element={<LessonForm createLesson={true} />} />
+            <Route path="/lessons/:id/edit" element={<LessonForm editLesson={true} />} />
+            <Route path="/lessons/:id/delete" element={<LessonForm deleteLesson={true} />} />
             <Route path="/*" element={<Navigate to="/courses" />} />
           </> : <>
             <Route path="/" element={<HomePage user={user} setUser={setUser} />} />

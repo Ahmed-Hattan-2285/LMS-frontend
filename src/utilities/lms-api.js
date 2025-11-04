@@ -26,6 +26,18 @@ export async function createLesson(data) {
     return sendRequest(lessonsUrl, 'POST', data)
 }
 
+export async function lessonDetail(id) {
+    return sendRequest(`${lessonsUrl}${id}/`)
+}
+
+export async function updateLesson(id, data) {
+    return sendRequest(`${lessonsUrl}${id}/`, 'PUT', data)
+}
+
+export async function deleteLesson(id) {
+    return sendRequest(`${lessonsUrl}${id}/`, 'DELETE')
+}
+
 export async function lessonsIndex() {
     return sendRequest(lessonsUrl)
 }

@@ -140,6 +140,14 @@ export default function CourseDetail() {
                                         <a href={l.video_url} target="_blank" rel="noreferrer">Watch</a>
                                     </>
                                 )}
+                                {user && user.role === 'instructor' && (
+                                    <>
+                                        {" "}
+                                        <Link to={`/lessons/${l.id}/edit`} className="edit-link">Edit</Link>
+                                        {" "}
+                                        <Link to={`/lessons/${l.id}/delete`} className="delete-link">Delete</Link>
+                                    </>
+                                )}
                             </li>
                         ))}
                     </ul>

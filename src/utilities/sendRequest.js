@@ -13,7 +13,7 @@ export default async function sendRequest(url, method = 'GET', payload) {
     }
 
 	try {
-		const res = await fetch(`http://127.0.0.1:8000${url}`, options);
+		const res = await fetch(`http://localhost:8000/${url}`, options);
 		
 		if (res.status === 204) {
 			return null;
