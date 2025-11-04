@@ -11,7 +11,7 @@ import AuthPage from '../AuthPage/AuthPage';
 import SignupPage from '../SignupPage/SignupPage';
 import Navbar from '../../components/Navbar/Navbar';
 import Sidebar from '../../components/Sidebar/Sidebar';
-import redBoardLogo from '../../assets/images/red-board.svg';
+import redBoardLogo from '../../assets/images/yellow-board.svg';
 import * as usersAPI from '../../utilities/users-api';
 
 export default function App() {

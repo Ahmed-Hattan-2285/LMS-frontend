@@ -49,7 +49,7 @@ export default function ReviewForm({ courseId, addReview, updateReview, deleteRe
                 setFormData({ rating: 5, comment: "" });
             }
         } catch (err) {
-            console.error('Review error:', err);
+            console.error(err);
             if (err.data) {
                 if (typeof err.data === 'object' && !Array.isArray(err.data)) {
                     if (err.data.error) {
@@ -85,7 +85,7 @@ export default function ReviewForm({ courseId, addReview, updateReview, deleteRe
             setExistingReview(null);
             setFormData({ rating: 5, comment: "" });
         } catch (err) {
-            console.error('Delete review error:', err);
+            console.error(err);
             if (err.data) {
                 if (typeof err.data === 'object' && !Array.isArray(err.data)) {
                     if (err.data.error) {
@@ -151,4 +151,3 @@ export default function ReviewForm({ courseId, addReview, updateReview, deleteRe
         </form>
     );
 }
-

@@ -5,7 +5,7 @@ const AboutPage = () => {
   return (
     <div className="about-page-container">
       <h1>About Learning Management System</h1>
-    <p>This is a learning management system built with React and Django.</p>
+    <p>A web-based Learning Management System (LMS) that allows instructors to create and manage online courses while enabling students to enroll, watch lessons, and leave Reviews and Rating.</p>
     </div>
   )
 }

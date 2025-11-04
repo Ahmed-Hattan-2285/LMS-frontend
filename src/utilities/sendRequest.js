@@ -45,9 +45,9 @@ export default async function sendRequest(url, method = 'GET', payload) {
 		error.data = errorData;
 		throw error;
 	} catch (err) {
-		console.log(err, "error in send-request");
+		console.log(err);
 		if (err.status !== undefined) {
-			throw err; 
+			throw err;
 		}
 		throw new Error(err.message || 'Request failed');
 	}

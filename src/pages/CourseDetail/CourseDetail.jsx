@@ -131,6 +131,9 @@ export default function CourseDetail() {
                         {courseDetail.lessons.map(l => (
                             <li key={l.id}>
                                 <strong>{l.title}</strong>
+                                {l.duration && (
+                                    <span className="lesson-duration"> ({l.duration} min)</span>
+                                )}
                                 {l.video_url && (
                                     <>
                                         {" "}

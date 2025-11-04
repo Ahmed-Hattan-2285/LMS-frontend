@@ -16,7 +16,6 @@ export default function HomePage({ user, setUser }) {
   async function handleLogin(evt) {
     try {
       evt.preventDefault();
-      console.log("time to login!!!!");
       const loggedInUser = await usersAPI.login(formData);
       setUser(loggedInUser);
       navigate("/courses");

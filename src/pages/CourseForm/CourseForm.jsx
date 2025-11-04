@@ -59,9 +59,7 @@ export default function CourseForm({ createCourse, editCourse, deleteCourse }) {
             setFormData(initialState);
             navigate(`/courses/${newCourse.id}`);
         } catch (err) {
-            console.error('Course update/create error:', err);
-            console.error('Error data:', err.data);
-            console.error('Error status:', err.status);
+            console.error(err);
         }
     }
     async function handleDelete(evt) {
@@ -82,10 +80,12 @@ export default function CourseForm({ createCourse, editCourse, deleteCourse }) {
             <Link to={`/courses/${currCourse.id}`} className="btn secondary">Cancel</Link>
             <button type="submit" className="btn delete">Yes - Delete!</button>
         </form>
-    </>)
+        </>
+    );
 
-    if (editCourse && !currCourse) return <h1>Loading</h1>
-    if (createCourse || editCourse) return (<>
+    if (editCourse && !currCourse) return <h1>Loading</h1>;
+    if (createCourse || editCourse) return (
+        <>
         <div className="page-header">
             {editCourse ? <h1>Edit {currCourse.title}'s Info</h1> : <h1>Add a Course</h1>}
             <img src={blueBoard} alt="A board with course icon" />
@@ -185,5 +185,6 @@ export default function CourseForm({ createCourse, editCourse, deleteCourse }) {
                 <button type="submit" className="btn submit">Submit!</button>
             </div>
         </form>
-    </>)
+        </>
+    );
 }
