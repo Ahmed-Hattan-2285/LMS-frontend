@@ -1,4 +1,31 @@
-RESTful Routing for LMS
+## Learning Management System
+<p>A web-based Learning Management System (LMS) that allows instructors to create and manage online courses while enabling students to enroll, watch lessons, and leave Reviews and Rating.</p>
+
+## Tech Stack
+<table border="1" width="100%">
+    <thead>
+        <tr>
+            <th width="6%">Technology</th>
+            <th width="55%">Purpose</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td>React</td><td>For building a dynamic and responsive user interface.</td>
+        <tr><td>CSS</td><td>Structure and styling of the web pages.</td>
+        <tr><td>React Router</td><td>For handling navigation between pages.</td>
+    </tbody>
+</table>
+
+
+## Backend Link 
+
+[Backend](https://github.com/Ahmed-Hattan-2285/LMS-backend).
+
+## Link to Deployed Site 
+
+[Deployed](http://localhost:5173/).
+
+## RESTful Routing for LMS
 
 <h2>Profile</h2>
 <table border="1" width="100%">
@@ -66,3 +93,15 @@ RESTful Routing for LMS
         <tr><td>/reviews/:id/delete</td><td>{ReviewFormPage}</td><td>Form for Student to Remove a review</td></tr>
     </tbody>
 </table>
+
+### IceBox Features
+
+- **Dark / Light Mode Toggle** – Allow users to switch between light and dark themes for better accessibility.
+
+- **Progress Tracking Dashboard** – Visual graphs to show students’ course completion and progress over time.
+
+- **Notifications System** – Real-time alerts for new lessons, comments, or instructor messages.
+
+- **Search and Filter Bar** – Advanced search to filter courses by difficulty, category, or instructor.
+
+- **Responsive Mobile App UI** – Optimized layout and controls for mobile users.
