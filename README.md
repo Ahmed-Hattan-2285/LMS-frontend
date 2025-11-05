@@ -1,5 +1,39 @@
 ## Learning Management System
-<p>A web-based Learning Management System (LMS) that allows instructors to create and manage online courses while enabling students to enroll, watch lessons, and leave Reviews and Rating.</p>
+**Project Description:**
+<p>The Learning Management System (LMS) frontend provides an interactive interface for students and instructors.
+It allows users to browse courses, watch lessons, write reviews, and manage their learning progress.
+Built with React, the app communicates seamlessly with a Django REST Framework backend.</p>
+
+## Repository Description
+It includes all React components, routing logic, and API integrations for displaying and managing course content.
+
+## User Stories
+**Instructor Stories:**
+
+As an instructor, I want to create a new course, so I can share educational content.
+
+As an instructor, I want to upload lessons (videos) to my courses, so students can learn.
+
+As an instructor, I want to upload Cover Image to specific course.
+
+As an instructor, I want to edit or delete my courses, so I can manage outdated content.
+
+As an instructor, I want to edit or delete my lessons, so I can manage outdated content.
+
+As an instructor, I want to see reviews, so I can improve course quality.
+
+
+**Student Stories:**
+
+As a student, I want to view a list of available courses, so I can choose what to learn.
+
+As a student, I want to watch lessons for a specific course, so I can study online.
+
+As a student, I want to leave reviews and ratings, so I can share my learning experience.
+
+As a student, I want to see the overall course rating, so I can pick the best options.
+
+As an student, I want to edit or delete my reviews.
 
 ## Tech Stack
 <table border="1" width="100%">
@@ -13,17 +47,40 @@
         <tr><td>React</td><td>For building a dynamic and responsive user interface.</td>
         <tr><td>CSS</td><td>Structure and styling of the web pages.</td>
         <tr><td>React Router</td><td>For handling navigation between pages.</td>
+        <tr><td>Docker</td><td>For containerized development and deployment.</td>
+        <tr><td>Vite</td><td>for app bundling and local server</td>
     </tbody>
 </table>
 
 
-## Backend Link 
+## Backend Repository 
 
 [Backend](https://github.com/Ahmed-Hattan-2285/LMS-backend).
 
-## Link to Deployed Site 
+## Deployed Site
 
-[Deployed](http://localhost:5173/).
+[Live Demo](http://localhost:5173/).
+
+### Installation & Setup (Using Docker)
+
+**1. Clone the Repository**
+```
+git clone https://github.com/yourusername/lms-backend.git
+cd lms-backend
+```
+
+**2. Create .env file**
+```
+DEBUG=True
+SECRET_KEY=your-secret-key
+DATABASE_URL=postgres://postgres:password@db:5432/lms_db
+ALLOWED_HOSTS=*
+```
+
+**3. Build & Run with Docker**
+```
+docker compose up --build
+```
 
 ## RESTful Routing for LMS
 
