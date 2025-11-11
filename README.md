@@ -55,7 +55,7 @@ As an student, I want to edit or delete my reviews.
 
 ## Backend Repository 
 
-[Backend](https://github.com/Ahmed-Hattan-2285/LMS-backend).
+[Backend](https://github.com/Ahmed-Hattan-2285/CourseFlow-backend).
 
 ## Deployed Site
 
@@ -65,15 +65,15 @@ As an student, I want to edit or delete my reviews.
 
 **1. Clone the Repository**
 ```
-git clone https://github.com/yourusername/lms-backend.git
-cd lms-backend
+git clone https://github.com/yourusername/CourseFlow-backend.git
+cd CourseFlow-backend
 ```
 
 **2. Create .env file**
 ```
 DEBUG=True
 SECRET_KEY=your-secret-key
-DATABASE_URL=postgres://postgres:password@db:5432/lms_db
+DATABASE_URL=postgres://postgres:password@db:5432/CourseFlow_db
 ALLOWED_HOSTS=*
 ```
 
@@ -82,7 +82,7 @@ ALLOWED_HOSTS=*
 docker compose up --build
 ```
 
-## RESTful Routing for LMS
+## RESTful Routing for CourseFlow
 
 <h2>Profile</h2>
 <table border="1" width="100%">
