@@ -1,6 +1,6 @@
-## Learning Management System
+## CourseFlow
 **Project Description:**
-<p>The Learning Management System (LMS) frontend provides an interactive interface for students and instructors.
+<p>The CourseFlow frontend provides an interactive interface for students and instructors.
 It allows users to browse courses, watch lessons, write reviews, and manage their learning progress.
 Built with React, the app communicates seamlessly with a Django REST Framework backend.</p>
 
